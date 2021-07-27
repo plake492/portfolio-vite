@@ -1,0 +1,84 @@
+@import './mixins';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  line-height: 1.4;
+  background-color: hsl(0, 0%, 11%);
+}
+
+.body {
+  transition: 1s;
+}
+
+.dark {
+  background-color: hsl(0, 0%, 11%);
+  color: hsl(0, 0%, 88%);
+}
+
+.light {
+  background-color: hsl(0, 0%, 89%);
+  color: hsl(0, 0%, 12%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+hr {
+  margin: 5rem 0;
+}
+
+footer {
+  width: 100%;
+  background-color: rgb(54, 54, 54);
+  height: 100px;
+  margin-top: 5rem;
+  color: #e0e0e0;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.card_container {
+  @include flexCenter();
+}
+
+.card {
+  background-color: rgb(54, 54, 54);
+  padding: 1rem;
+  color: #e0e0e0;
+  width: 100%;
+  margin: 0 2rem;
+  height: 500px;
+  text-align: center;
+  transition: 0.5s ease-in-out;
+  @include flexCenter(column);
+
+  &:hover {
+    // background-color: hsl(0, 0%, 79%);
+    // color: hsl(0, 0%, 22%);
+    transform: scale(1.03);
+  }
+}
+
+.flex_center {
+  @include flexCenter();
+}
+
+.about {
+  @include flexCenter();
+}
