@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@500&family=Lexend:wght@500&display=swap');
+@import './variables';
 @import './mixins';
+@import './animations';
 
 * {
   box-sizing: border-box;
@@ -7,28 +10,28 @@
 }
 
 body {
-  font-family: Helvetica, sans-serif;
   line-height: 1.4;
-  background-color: hsl(0, 0%, 11%);
+  background-color: rgba(224, 224, 224, 1);
+  font-family: 'Lexend', sans-serif;
 }
 
 .body {
   transition: 1s;
+  position: relative;
 }
 
 .dark {
-  background-color: hsl(0, 0%, 11%);
-  color: hsl(0, 0%, 88%);
+  @include dark;
 }
 
 .light {
-  background-color: hsl(0, 0%, 89%);
-  color: hsl(0, 0%, 12%);
+  @include light;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 img {
@@ -40,12 +43,114 @@ hr {
   margin: 5rem 0;
 }
 
-footer {
+nav {
+  @include menu($linear);
+  > h1 {
+    transition: 1s;
+    font-size: 3rem;
+    margin-top: 6rem;
+    text-shadow: 4px 4px hsl(0, 0%, 30%), 8px 8px hsl(0, 0%, 70%);
+    transform: translateX(-10px) translateY(-10px);
+    text-transform: uppercase;
+  }
+}
+
+.nav_bar {
+  @include flexCenter(row, flex-start);
+}
+
+.profile {
+  width: 50%;
+  transition: 1s;
+  // &:hover {
+  //   transform: translateX(-400px) translateY(0px);
+  //   box-shadow: 800px 0px 0 0 hsl(0, 0%, 30%), 400px 800px 0 0 hsl(0, 0%, 70%);
+  // }
+}
+
+.img_animate {
+  box-shadow: 10px 10px 0 0 hsl(0, 0%, 30%), 20px 20px 0 0 hsl(0, 0%, 70%);
+  transform: translateX(-10px) translateY(-10px);
+}
+
+.img_animate_complete {
+  transform: translateX(-400px) translateY(0px);
+  box-shadow: 800px 0px 0 0 hsl(0, 0%, 30%), 400px 800px 0 0 hsl(0, 0%, 70%);
+}
+
+.img_section {
+  @include flexCenter(column, center);
+
+  .icon_list {
+    width: 100%;
+    margin-top: 5rem;
+    @include flexCenter(row, center);
+  }
+}
+
+.icon {
+  width: 200px;
+  img {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    height: auto;
+    filter: grayscale(100%);
+    transition: 0.7s;
+  }
+}
+
+.overlay {
+  position: absolute;
   width: 100%;
-  background-color: rgb(54, 54, 54);
-  height: 100px;
-  margin-top: 5rem;
-  color: #e0e0e0;
+  bottom: -400px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card_single {
+  @include light;
+  padding: 1rem;
+  width: 100%;
+  height: 300px;
+  text-align: center;
+  transition: 0.5s ease-in-out;
+  @include flexCenter(column, center);
+  box-shadow: 0px 0 10px 3px #000000;
+}
+
+footer {
+  @include menu($linear-reverse);
+  @include flexCenter(row, flex-end);
+}
+
+.icon_title {
+  text-shadow: 4px 4px hsl(0, 0%, 30%), 8px 8px hsl(0, 0%, 13%);
+}
+
+#about {
+  margin: 10rem 0;
+  padding: 15rem;
+  background: rgb(28, 28, 28);
+  background: linear-gradient(
+    150deg,
+    rgba(28, 28, 28, 1) 50%,
+    rgba(224, 224, 224, 1) 50%,
+    rgba(224, 224, 224, 1) 50%,
+    rgba(28, 28, 28, 1) 50%
+  );
+
+  transition: 10s;
+  .text {
+    color: rgba(28, 28, 28, 1);
+    line-height: 2rem;
+    font-size: 18px;
+    transition: 1s;
+  }
+  h2 {
+    padding-top: 2.5rem;
+    color: rgba(28, 28, 28, 1);
+  }
 }
 
 .container {
@@ -54,31 +159,71 @@ footer {
 }
 
 .card_container {
-  @include flexCenter();
+  @include flexCenter(row, center);
+  height: 500px;
 }
 
 .card {
   background-color: rgb(54, 54, 54);
   padding: 1rem;
-  color: #e0e0e0;
+  color: $text-light;
   width: 100%;
   margin: 0 2rem;
   height: 500px;
   text-align: center;
   transition: 0.5s ease-in-out;
-  @include flexCenter(column);
+  @include flexCenter(column, center);
+  box-shadow: 0px 0 10px 3px #000000;
 
   &:hover {
-    // background-color: hsl(0, 0%, 79%);
-    // color: hsl(0, 0%, 22%);
+    box-shadow: 0px 0 10px 3px rgb(54, 54, 54);
     transform: scale(1.03);
+    @include light;
   }
 }
 
+.hide {
+  display: none;
+}
+
+.show {
+  animation: show 2s;
+}
+
+.rotate {
+  animation-name: rotate;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+}
+
 .flex_center {
-  @include flexCenter();
+  @include flexCenter(row, center);
 }
 
 .about {
-  @include flexCenter();
+  @include flexCenter(row, center);
+}
+
+@keyframes show {
+  from {
+    transform: scale(0.5);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate3d(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
