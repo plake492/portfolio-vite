@@ -3,21 +3,18 @@
     <div class="nav_bar">
       <h1 style="font-size: 2rem">PATRICK LAKE</h1>
       <div>
-        <div
-          style="display: inline; margin-left: 1rem"
-          v-for="(link, i) in links"
-          :key="i"
-        >
-          <a style="text-transform: uppercase" @click="scroll(link)"
-            >{{ link }}
+        <div style="display: inline" v-for="(link, i) in links" :key="i">
+          <a style="text-transform: uppercase" @click="scroll(link)">
+            {{ link }}
           </a>
+          <span v-if="i !== links.length - 1" style="margin: 1rem"> / </span>
         </div>
       </div>
     </div>
     <transition enter-active-class="seperate" appear>
-      <h1>Full - Stack - Web - Developer</h1>
+      <h1 style="margin-top: 15rem">Full - Stack - Web - Developer</h1>
     </transition>
-    <div id="moving"></div>
+    <!-- <div id="moving"></div> -->
   </nav>
 </template>
 
@@ -30,22 +27,23 @@ const scroll = location => {
 
 const links = ['about', 'examples']
 
-const timer = ref(null)
-let baseB = 85
-let baseL = 0
+//========== animation Cube
+// const timer = ref(null)
+// let baseB = 85
+// let baseL = 0
 
-const start = el => {
-  timer.value = window.setInterval(() => {
-    el.setAttribute('style', `bottom: ${baseB}px; left: ${baseL}px`)
-    baseB += 0.09
-    baseL += 1
-  }, 1)
-}
+// const start = el => {
+//   timer.value = window.setInterval(() => {
+//     el.setAttribute('style', `bottom: ${baseB}px; left: ${baseL}px`)
+//     baseB += 0.09
+//     baseL += 1
+//   }, 1000)
+// }
 
-onMounted(() => {
-  const el = document.getElementById('moving')
-  start(el)
-})
+// onMounted(() => {
+//   const el = document.getElementById('moving')
+//   start(el)
+// })
 </script>
 
 <style scoped>
