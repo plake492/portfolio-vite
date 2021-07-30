@@ -36,8 +36,13 @@
     @include light;
     height: 300px;
 
-    img {
-      width: 50%;
+    .card_single {
+      @include flexCenter(row, space-between);
+      padding: 2rem 7rem 1rem 7rem;
+
+      img {
+        width: 50%;
+      }
     }
   }
 }
