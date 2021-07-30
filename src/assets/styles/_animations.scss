@@ -1,11 +1,18 @@
-.fade-enter-active,
-.fade-leave-active {
+.fade-enter-active {
   transition: opacity 1.5s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.fade-enter-from {
   opacity: 0;
+}
+
+.slide-enter-active {
+  transition: opacity 3s ease-out, transform 1.5s ease-out;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(-1000px);
 }
 
 .seperate {
@@ -24,5 +31,23 @@
   to {
     text-shadow: 4px 4px hsl(0, 0%, 30%), 8px 8px hsl(0, 0%, 70%);
     transform: translateX(-10px) translateY(-10px);
+  }
+}
+
+.show {
+  animation: show 2s;
+}
+
+@keyframes show {
+  from {
+    transform: scale(0.5);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: all;
   }
 }

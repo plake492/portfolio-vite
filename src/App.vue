@@ -1,6 +1,8 @@
 <template>
   <transition name="fade" appear>
     <div>
+      {{ width }}
+      {{ widthType }}
       <Nav />
       <router-view></router-view>
       <Footer />
@@ -11,9 +13,4 @@
 <script setup>
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  window.scroll(0, 0)
-})
 </script>

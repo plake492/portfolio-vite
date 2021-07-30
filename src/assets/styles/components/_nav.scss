@@ -1,0 +1,44 @@
+header {
+  @include menu($linear);
+  transition: 0.3s;
+
+  > h1 {
+    transition: 1s;
+    font-size: 3rem;
+    margin-top: 6rem;
+    text-shadow: 4px 4px hsl(0, 0%, 30%), 8px 8px hsl(0, 0%, 70%);
+    transform: translateX(-10px) translateY(-10px);
+    text-transform: uppercase;
+  }
+  nav {
+    position: relative;
+    @include flexCenter(row, flex-start);
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  header {
+    padding: 4rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  header {
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  header {
+    padding: 0.5rem 1rem;
+    height: 750px;
+
+    h1 {
+      @include flexCenter(column, flex-start);
+    }
+
+    nav {
+      @include flexCenter(column, flex-start);
+    }
+  }
+}

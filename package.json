@@ -7,10 +7,13 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "gsap": "^3.7.1",
     "velocity-animate": "^1.5.2",
     "vue": "^3.0.5",
+    "vue-animate-onscroll": "^1.0.8",
     "vue-router": "^4.0.10",
-    "vue3-observe-visibility2": "^0.0.3"
+    "vue3-observe-visibility2": "^0.0.3",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.5",

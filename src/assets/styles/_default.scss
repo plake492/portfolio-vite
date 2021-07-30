@@ -1,0 +1,106 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.4;
+  background-color: rgba(224, 224, 224, 1);
+  font-family: 'Lexend', sans-serif;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    color: hsl(0, 0%, 47%);
+  }
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+hr {
+  margin: 5rem 0;
+}
+
+.body {
+  transition: 1s;
+  position: relative;
+}
+
+h1,
+h2,
+.h1,
+.h2 {
+  text-transform: uppercase;
+}
+
+.dark {
+  @include dark;
+}
+
+.light {
+  @include light;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.d-inline {
+  display: inline;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-none {
+  display: none;
+}
+
+.hide {
+  display: none !important;
+}
+
+.flex_center {
+  @include flexCenter(row, center);
+}
+
+.card {
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  transition: 0.5s ease-in-out;
+  @include flexCenter(column, center);
+  box-shadow: $box-shadow-dark;
+}

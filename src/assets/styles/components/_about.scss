@@ -1,0 +1,45 @@
+article {
+  margin: 10rem 0;
+  padding: 15rem;
+  background: rgb(28, 28, 28);
+  background: linear-gradient(
+    150deg,
+    rgba(28, 28, 28, 1) 50%,
+    rgba(224, 224, 224, 1) 50%,
+    rgba(224, 224, 224, 1) 50%,
+    rgba(28, 28, 28, 1) 50%
+  );
+
+  p {
+    color: rgba(28, 28, 28, 1);
+    line-height: 2rem;
+    font-size: 18px;
+    transition: 1s;
+    align-self: start;
+    margin-top: 5rem;
+  }
+
+  h2 {
+    padding-top: 2.5rem;
+    color: rgba(28, 28, 28, 1);
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  article {
+    padding: 4rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  article {
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  article {
+    padding: 0.75rem;
+    margin: 10rem 0;
+  }
+}

@@ -1,41 +1,46 @@
 <template>
-  <div id="examples">
-    <div class="container" style="margin-top: 10rem; padding-bottom: 10rem">
-      <h2 style="margin: 5rem 0">EXAMPLES</h2>
-      <div id="target_ex" class="card_container">
-        <div class="card hide" v-for="(item, i) in items">
-          <img :src="item.img" />
-          <h1>{{ item.title }}</h1>
-          <p>{{ item.description }}</p>
-          <div>
-            <a :href="item.link" target="_blank">Website</a> |
-            <a href="#">Github</a>
+  <section>
+    <div class="container examples">
+      <h2 id="examples">EXAMPLES</h2>
+      <transition name="slide">
+        <div v-if="cardsVisable" class="card_container">
+          <div class="card" v-for="(item, i) in items">
+            <img :src="item.img" />
+            <h1>{{ item.title }}</h1>
+            <p>{{ item.description }}</p>
+            <div>
+              <a :href="item.link" target="_blank">Website</a> |
+              <a href="#">Github</a>
+            </div>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
-  </div>
-  <div class="container overlay">
-    <div class="card_single hide">
-      <div style="padding: 1rem">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-          inventore totam fuga necessitatibus repellat consequuntur sint rem
-          nihil suscipit. Ea facilis impedit odio voluptates libero earum,
-          debitis doloribus numquam dolore?
-        </p>
-        <div class="flex_center" style="padding: 3rem 10rem 0">
-          <div class="icon" v-for="(icon, i) in icons2" :key="i">
-            <img :src="icon.img" />
+    <div class="container overlay">
+      <transition name="slide">
+        <div v-if="cardsVisable" style="transition-delay: 1s" class="card">
+          <div style="padding: 1rem">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
+              inventore totam fuga necessitatibus repellat consequuntur sint rem
+              nihil suscipit. Ea facilis impedit odio voluptates libero earum,
+              debitis doloribus numquam dolore?
+            </p>
+            <div class="card_single">
+              <div v-for="(icon, i) in icons" :key="i">
+                <img :src="icon.img" />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import gsap from 'gsap'
 
 import refugeImg from '../assets/imgs/refuge.png'
 import esteemedTalent from '../assets/imgs/esteemed_talent.png'
@@ -45,7 +50,25 @@ import cssImg from '../assets/imgs/logos/css.png'
 import htmlImg from '../assets/imgs/logos/html.png'
 import { intersectionObserverBase } from '../use/intersectionObserverBase'
 
-const icons2 = [
+const cardsVisable = ref(false)
+
+// watch(cardsVisable, newValue => {
+//   console.log('newValue==>>', newValue)
+//   if (newValue) {
+//     animateCard()
+//   }
+// })
+
+// const animateCard = () => {
+//   console.log('********! Its loggin, Its logging ********!')
+//   gsap.from('.card', {
+//     duration: 20,
+//     opacity: 0.5,
+//     scale: 0.5
+//   })
+// }
+
+const icons = [
   { title: 'vue.js', img: jsImg },
   { title: 'firebase', img: cssImg },
   { title: 'serverless', img: htmlImg }
@@ -81,15 +104,16 @@ const items = ref([
   }
 ])
 
-intersectionObserverBase('target_ex', isIntersecting => {
+intersectionObserverBase('examples', isIntersecting => {
   if (isIntersecting) {
-    const elms = document.querySelectorAll('.card')
-    elms.forEach(el => {
-      el.classList.add('show')
-      el.classList.remove('hide')
-    })
-    document.querySelector('.card_single').classList.add('show')
-    document.querySelector('.card_single').classList.remove('hide')
+    cardsVisable.value = true
+    // const elms = document.querySelectorAll('.card')
+    // elms.forEach(el => {
+    //   el.classList.add('show')
+    //   el.classList.remove('hide')
+    // })
+    // document.querySelector('.card_single').classList.add('show')
+    // document.querySelector('.card_single').classList.remove('hide')
   }
 })
 </script>

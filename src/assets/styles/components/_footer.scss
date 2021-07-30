@@ -1,0 +1,23 @@
+footer {
+  @include menu($linear-reverse);
+  @include flexCenter(row, flex-end);
+}
+
+@media screen and (max-width: 1240px) {
+  footer {
+    padding: 4rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  footer {
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  footer {
+    padding: 0.5rem 1rem 2rem 1rem;
+    height: 750px;
+  }
+}

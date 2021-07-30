@@ -1,8 +1,8 @@
 <template>
-  <div id="about">
-    <div id="target" class="container">
+  <article id="about">
+    <div class="container">
       <h2>ABOUT ME</h2>
-      <p class="text" style="align-self: start; margin-top: 5rem">
+      <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, illum
         consectetur quidem tempore expedita velit exercitationem aut sint iure
         tempora, eaque ut blanditiis quasi tenetur reiciendis, numquam sit
@@ -20,7 +20,7 @@
         sit assumenda sapiente, nat
       </p>
     </div>
-  </div>
+  </article>
 </template>
 
 <script setup>
@@ -33,7 +33,7 @@ const change = 0.5
 let id
 
 intersectionObserverBase(
-  'target',
+  'about',
   isIntersecting => {
     if (isIntersecting) {
       if (up >= 100 && down <= 0) {
@@ -45,19 +45,6 @@ intersectionObserverBase(
   },
   0.25
 )
-
-// const closeDoor = () => {
-//   id = window.setInterval(() => {
-//     if (up === 50 && down === 50) {
-
-//       return window.clearInterval(id)
-//     }
-//     up -= change
-//     down += change
-//     rotate -= change * 1.76
-//     growEl()
-//   }, 20)
-// }
 
 const openDoorTimer = () => {
   id = window.setInterval(() => {
@@ -76,12 +63,12 @@ const growEl = () => {
   targetEl.setAttribute(
     'style',
     `background: linear-gradient(
-          ${rotate}deg,
-          rgba(28, 28, 28, 1) ${down}%,
-          rgba(224, 224, 224, 1) ${down}%,
-          rgba(224, 224, 224, 1) ${up}%,
-          rgba(28, 28, 28, 1) ${up}%
-        );`
+      ${rotate}deg,
+      rgba(28, 28, 28, 1) ${down}%,
+      rgba(224, 224, 224, 1) ${down}%,
+      rgba(224, 224, 224, 1) ${up}%,
+      rgba(28, 28, 28, 1) ${up}%
+    );`
   )
 }
 </script>

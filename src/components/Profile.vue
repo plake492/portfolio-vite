@@ -1,115 +1,65 @@
 <template>
-  <div class="container" style="padding: 15rem 2rem">
-    <div class="img_section">
-      <div class="profile_img_wrapper">
-        <img id="profile" class="profile" :src="profilePic" alt="" />
-        <div
-          class="underlay_1"
-          :style="
-            type === 'development' && 'box-shadow: 0 0 20px 10px #000000;'
-          "
-        >
-          <h1>Development</h1>
-        </div>
-        <div
-          class="underlay_2"
-          :style="type === 'design' && 'box-shadow: 0 0 20px 10px #000000;'"
-        >
-          <h1>Design</h1>
-        </div>
-      </div>
-      <div class="icon_list">
-        <div class="icon hide" v-for="(icon, i) in icons" :key="i">
-          <div style="width: 100%">
-            <img
-              :style="
-                icon.active && 'filter: grayscale(0%);transform: scale(1.05);'
-              "
-              :src="icon.img"
-            />
-          </div>
-        </div>
-      </div>
-      <div style="margin-top: 5rem" class="icon_show_wrapper">
-        <div class="line"></div>
-        <transition name="fade" mode="out-in">
-          <h1
-            :key="selected"
-            class="icon_title"
-            style="text-transform: uppercase"
-          >
-            {{ selected }}
-          </h1>
-        </transition>
-        <div class="line"></div>
+  <main class="container">
+    <div class="profile_wrapper">
+      <img
+        id="profile"
+        :class="widthType !== 's' && 'under_shadow'"
+        :src="profilePic"
+        alt="Profile Image"
+      />
+      <div
+        v-if="widthType !== 's'"
+        v-for="(card, i) in cards"
+        :key="card"
+        :class="`underlay_${i + 1}`"
+        :style="selected.type === card && 'box-shadow: 0 0 20px 10px #000000;'"
+      >
+        <h1 class="uppercase">{{ card }}</h1>
       </div>
     </div>
+    <div class="icon_list w-100">
+      <div class="icon hide" v-for="icon in icons" :key="icon.title">
+        <img
+          :style="
+            icon.active && 'filter: grayscale(0%);transform: scale(1.05);'
+          "
+          :src="icon.img"
+          :alt="`${icon.title} icon`"
+        />
+      </div>
+    </div>
+    <div class="icon_wrapper w-100">
+      <div class="line"></div>
+      <transition name="fade" mode="out-in">
+        <h1 :key="selected">
+          {{ selected.title }}
+        </h1>
+      </transition>
+      <div class="line"></div>
+    </div>
+  </main>
+  <div v-if="widthType === 's'">
+    <transition name="slide">
+      <h2 class="capitalize icon_type_sm">{{ selected.type }}</h2>
+    </transition>
   </div>
+  <br />
   <div id="profile_complete"></div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { store } from '../store'
 import { intersectionObserverBase } from '../use/intersectionObserverBase'
+import { iconsAnimation } from '../use/iconsAnimation'
 
 import profilePic from '../assets/imgs/profile.jpeg'
-import vueImg from '../assets/imgs/logos/vue.png'
-import serverlessImg from '../assets/imgs/logos/serverless.png'
-import firebaseImg from '../assets/imgs/logos/firebase.png'
-import reactImg from '../assets/imgs/logos/react.png'
-import stripeImg from '../assets/imgs/logos/stripe.png'
-import nodeImg from '../assets/imgs/logos/nodejs.png'
-import expressImg from '../assets/imgs/logos/express.png'
-import bootstrapImg from '../assets/imgs/logos/bootstrap.png'
 
-const selected = ref('Vue')
-const type = ref('desgin')
+const cards = ['development', 'design']
 
-const selectIcon = item => {
-  selected.value = item
-}
-const selectType = item => {
-  type.value = item
-}
+const { selected, startTimer, icons } = iconsAnimation()
 
-const showIcons = () => {
-  const elms = document.querySelectorAll('.icon')
-  elms.forEach(el => {
-    el.classList.add('show')
-    el.classList.remove('hide')
-  })
-}
-
-const icons = ref([
-  { title: 'vue.js', img: vueImg, active: true, type: 'design' },
-  { title: 'firebase', img: firebaseImg, active: false, type: 'development' },
-  { title: 'bootstrap', img: bootstrapImg, active: false, type: 'design' },
-  {
-    title: 'serverless',
-    img: serverlessImg,
-    active: false,
-    type: 'development'
-  },
-  { title: 'stripe', img: stripeImg, active: false, type: 'development' },
-  { title: 'node.js', img: nodeImg, active: false, type: 'development' },
-  { title: 'express.js', img: expressImg, active: false, type: 'development' },
-  { title: 'react.js', img: reactImg, active: false, type: 'design' }
-])
-const timer = ref(null)
-let index = 0
-
-const startTimer = () => {
-  timer.value = window.setInterval(() => {
-    icons.value[index].active = false
-    index++
-    if (index === icons.value.length) {
-      index = 0
-    }
-    icons.value[index].active = true
-    selectIcon(icons.value[index].title)
-    selectType(icons.value[index].type)
-  }, 4000)
-}
+const widthType = ref('')
 
 startTimer()
 
@@ -130,4 +80,22 @@ intersectionObserverBase('profile_complete', isIntersecting => {
     document.querySelector('.underlay_2').classList.add('animate_card_2')
   }
 })
+
+const onWidthChange = () => {
+  store.dispatch('setWidth', window.innerWidth)
+  if (window.innerWidth < 550) {
+    widthType.value = 's'
+  }
+  if (window.innerWidth > 549 && window.innerWidth < 1200) {
+    widthType.value = 'md'
+  }
+  if (window.innerWidth > 1199) {
+    widthType.value = 'lg'
+  }
+}
+
+onWidthChange()
+
+onMounted(() => window.addEventListener('resize', onWidthChange))
+onUnmounted(() => window.removeEventListener('resize', onWidthChange))
 </script>
