@@ -20,7 +20,6 @@
         sit assumenda sapiente, nat
       </p>
     </div>
-    <button @click="closeDoor">^</button>
   </div>
 </template>
 
@@ -47,19 +46,18 @@ intersectionObserverBase(
   0.25
 )
 
-const closeDoor = () => {
-  id = window.setInterval(() => {
-    if (up === 50 && down === 50) {
-      //   line()
+// const closeDoor = () => {
+//   id = window.setInterval(() => {
+//     if (up === 50 && down === 50) {
 
-      return window.clearInterval(id)
-    }
-    up -= change
-    down += change
-    rotate -= change * 1.76
-    growEl()
-  }, 20)
-}
+//       return window.clearInterval(id)
+//     }
+//     up -= change
+//     down += change
+//     rotate -= change * 1.76
+//     growEl()
+//   }, 20)
+// }
 
 const openDoorTimer = () => {
   id = window.setInterval(() => {
