@@ -44,6 +44,7 @@ import gsap from 'gsap'
 
 import refugeImg from '../assets/imgs/refuge.png'
 import esteemedTalent from '../assets/imgs/esteemed_talent.png'
+import colorPickerImg from '../assets/imgs/colorPicker.png'
 
 import jsImg from '../assets/imgs/logos/js.png'
 import cssImg from '../assets/imgs/logos/css.png'
@@ -94,9 +95,9 @@ const items = ref([
       aliquam consectetur magni consequatur.`
   },
   {
-    title: 'Refuge',
-    link: 'https://app.thesalesrebllion.com',
-    img: refugeImg,
+    title: 'Cool Color Picker',
+    link: 'https://plake492.github.io/color_picker/',
+    img: colorPickerImg,
     description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
       praesentium, illo excepturi harum possimus consequuntur blanditiis
       eum vel porro animi assumenda fugit nostrum recusandae, ut ad
